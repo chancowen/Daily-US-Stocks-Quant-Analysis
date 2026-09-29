@@ -1,0 +1,80 @@
+<div id="w" style="font-family:var(--kimi-font-sans);color:var(--kimi-color-text-primary);font-variant-numeric:tabular-nums;font-feature-settings:'tnum' 1">
+<style>
+#w button,#w input{font:inherit}
+#w .hd{display:flex;align-items:baseline;justify-content:space-between;gap:8px;flex-wrap:wrap}
+#w .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:16px 0}
+#w .stat{border:0.5px solid var(--kimi-color-border);border-radius:10px;padding:12px}
+#w .chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+#w .chip{border:0.5px solid var(--kimi-color-border);border-radius:6px;padding:4px 12px;background:transparent;color:var(--kimi-color-text-secondary);cursor:pointer;font-size:14px;transition:background var(--t-fast) var(--ease-out)}
+#w .chip.on{background:var(--kimi-color-text-primary);color:var(--kimi-color-surface);border-color:transparent;font-weight:500}
+#w .row{display:flex;align-items:center;gap:12px;padding:8px 4px;border-bottom:0.5px solid var(--kimi-color-border)}
+#w .id{width:150px;flex-shrink:0;min-width:0}
+#w .nm{font-size:12px;color:var(--kimi-color-text-tertiary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#w .mid{flex:1;min-width:40px}
+#w .track{height:4px;border-radius:2px;background:var(--kimi-color-surface-muted)}
+#w .fill{height:4px;border-radius:2px}
+#w .sc{width:44px;text-align:right;font-size:15px;font-weight:500}
+#w .px{width:78px;flex-shrink:0;text-align:right;font-size:13px;font-weight:500}
+#w .pxl{font-size:10px;color:var(--kimi-color-text-quaternary);font-weight:400}
+#w .chg{width:56px;text-align:right;font-size:12px}
+#w .tag{font-size:12px;border-radius:6px;padding:2px 8px;white-space:nowrap}
+@media (max-width:640px){
+#w #rows{max-height:52vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
+#w .stats{gap:6px;margin:12px 0}
+#w .stat{padding:8px}
+#w .row{gap:8px;padding:7px 2px}
+#w .id{width:104px}
+#w .px{display:none}
+#w .mid{min-width:24px}
+}
+</style>
+<div class="hd">
+  <div style="font-size:17px;font-weight:500">US stock watchlist</div>
+  <div style="font-size:12px;color:var(--kimi-color-text-tertiary)">2026-09-28 · 4-pillar score 0–100</div>
+</div>
+<div class="stats" id="stats"></div>
+<div class="chips" id="chips"></div>
+<div id="focus"></div>
+<div id="rows"></div>
+<div style="font-size:12px;color:var(--kimi-color-text-quaternary);margin-top:12px">Daily 4-pillar quant screen · score changes vs previous day shown per row · not investment advice.</div>
+</div>
+<script>
+(function(){
+const D=[["TSM","TSMC","stock",77.0598,"FULL ENTRY",0.5038,null,"NEW",[76.93,77.9,78.1263,78.6548,79.22,77.0598],452.88,63.4916],["SPX","S&P 500","index",72.3254,"TRANCHE 1/3",-0.7712,null,"NEW",[77.97,74.97,73.9876,73.9624,74.9745,72.3254],7683.6899,51.0304],["VOO","Vanguard S&P 500","etf",70.8997,"TRANCHE 1/3",-0.7556,null,"NEW",[78.45,76.04,75.1065,74.9827,76.1329,70.8997],703.61,51.4487],["MSFT","Microsoft","stock",70.8755,"TRANCHE 1/3",-1.3465,null,"NEW",[71.28,70.96,71.0097,70.222,72.2004,70.8755],509.22,58.6371],["NVDA","NVIDIA","stock",70.7453,"TRANCHE 1/3",1.6839,null,"NEW",[71.7,69.55,69.2421,69.1372,69.8996,70.7453],228.86,58.7756],["SKHY","SK hynix","stock",69.8644,"TRANCHE 1/3",-5.0324,null,"NEW",[78.71,79.19,79.3313,78.3186,80.1247,69.8644],181.92,52.4211],["SPYM","State Street SPDR Portfolio S&P 500","etf",69.7089,"TRANCHE 1/3",-0.793,null,"NEW",[78.42,75.53,74.6066,74.4816,75.6989,69.7089],90.08,51.3354],["NASDAQ","Nasdaq Composite","index",68.9755,"TRANCHE 1/3",-0.9174,null,"NEW",[70.35,70.69,69.963,70.1106,69.4664,68.9755],26820.3809,55.7904],["MU","Micron","stock",68.0571,"TRANCHE 1/3",-2.6149,null,"NEW",[71.21,71.62,73.2824,71.8635,71.8974,68.0571],1053.98,58.3506],["META","Meta Platforms","stock",67.3547,"TRANCHE 1/3",-4.7947,null,"NEW",[63.46,67.6,68.0067,68.7883,68.657,67.3547],715.62,60.9898],["IGPT","Invesco AI and Next Gen Software","etf",66.8835,"TRANCHE 1/3",-2.3388,null,"NEW",[64.16,71.9,73.4142,73.7121,73.7141,66.8835],101.05,59.6975],["GOOG","Alphabet","stock",66.3653,"TRANCHE 1/3",-0.5629,null,"NEW",[65.72,71.1,69.4161,70.1567,71.0428,66.3653],339.16,48.435],["DELL","Dell","stock",65.555,"TRANCHE 1/3",-3.4572,null,"NEW",[69.08,67.23,67.0598,66.7132,66.6345,65.555],543.43,54.4431],["AMZN","Amazon","stock",64.7876,"TRANCHE 1/3",-1.4099,null,"NEW",[63.9,66.74,64.158,64.6677,64.615,64.7876],246.15,41.2438],["SNDK","Sandisk","stock",64.1271,"TRANCHE 1/3",-3.6511,null,"NEW",[67.16,68.8,69.6169,68.7463,68.759,64.1271],1712.89,53.3254],["WDC","Western Digital","stock",62.5511,"TRANCHE 1/3",-0.7837,null,"NEW",[61.68,64.74,64.8612,64.4761,64.6091,62.5511],453.23,48.7041],["QQQJ","Invesco NASDAQ Next Gen 100","etf",62.471,"TRANCHE 1/3",-1.2682,null,"NEW",[67.97,69.05,68.8892,68.3886,69.2612,62.471],43.91,43.0921],["AAPL","Apple","stock",61.5375,"TRANCHE 1/3",-0.7828,null,"NEW",[69.7,66.29,65.3142,66.0418,66.3311,61.5375],338.4,61.8238],["SMCI","Super Micro","stock",60.7557,"TRANCHE 1/3",-3.4212,null,"NEW",[61.87,58.42,59.6368,59.8989,60.9934,60.7557],41.78,58.84],["STX","Seagate","stock",60.667,"TRANCHE 1/3",0.5105,null,"NEW",[59.47,60.19,60.2923,60.514,61.7957,60.667],921.51,59.1993],["AVGO","Broadcom","stock",54.867,"WATCHLIST",-0.9183,null,"NEW",[53.49,55.54,54.9977,54.5994,55.464,54.867],349.57,42.2673],["DIS","Disney","stock",54.8052,"WATCHLIST",-0.5276,null,"NEW",[50.97,49.53,49.1677,50.8052,51.4743,54.8052],105.59,51.1358],["NET","Cloudflare","stock",54.3748,"WATCHLIST",1.424,null,"NEW",[50.65,53.77,53.6889,53.7649,53.6868,54.3748],353.99,63.6375],["QCOM","Qualcomm","stock",52.8355,"WATCHLIST",-7.1743,null,"NEW",[51.57,56.25,57.7195,56.7657,58.0937,52.8355],187.48,54.5503],["PLTR","Palantir","stock",52.4691,"WATCHLIST",-1.1546,null,"NEW",[52.13,54.28,54.9537,54.7951,55.0005,52.4691],187.48,61.0101],["AMD","AMD","stock",50.5277,"WATCHLIST",-3.6091,null,"NEW",[54.14,50.44,50.9589,50.8467,50.4472,50.5277],607.87,65.6189],["MRVL","Marvell","stock",47.7972,"WATCHLIST",-3.8329,null,"NEW",[49.6,49.14,49.9371,49.7191,49.6885,47.7972],251.9,57.1281],["COHR","Coherent","stock",47.2356,"WATCHLIST",-4.5229,null,"NEW",[43.39,46.35,43.8351,43.0282,44.3283,47.2356],282.45,45.7105],["ORCL","Oracle","stock",46.8968,"WATCHLIST",-3.2823,null,"NEW",[49.4,51.34,51.8253,50.7272,50.9731,46.8968],132.6,37.2758],["RDDT","Reddit","stock",46.6373,"WATCHLIST",-4.5115,null,"NEW",[48.27,51.17,49.6364,50.4989,50.2704,46.6373],143.08,39.9347],["FSLR","First Solar","stock",46.4777,"WATCHLIST",-2.6673,null,"NEW",[46.21,46.95,45.1982,43.4571,43.5757,46.4777],172.97,33.176],["TQQQ","ProShares UltraPro QQQ","etf",46.1188,"WATCHLIST",-3.2161,null,"NEW",[46.91,51.29,53.1985,52.9805,53.2875,46.1188],77.04,57.2183],["NFLX","Netflix","stock",45.8298,"WATCHLIST",-2.6985,null,"NEW",[45.76,48.05,47.1478,47.3814,46.8606,45.8298],69.23,33.4381],["IONQ","IonQ","stock",45.5625,"WATCHLIST",-1.9789,null,"NEW",[31.48,34.21,35.106,37.337,38.5855,45.5625],44.58,60.2786],["GLW","Corning","stock",45.5154,"WATCHLIST",-3.2857,null,"NEW",[42.32,47.44,45.6564,45.4283,46.2548,45.5154],151.59,47.6678],["IBM","IBM","stock",45.1122,"WATCHLIST",-2.1462,null,"NEW",[48.12,49.26,48.6683,46.536,46.4095,45.1122],220.67,37.7123],["AAOI","Applied Optoelectronics","stock",42.5143,"WATCHLIST",-4.5168,null,"NEW",[36.25,42.52,37.8363,37.7559,38.8707,42.5143],96.82,41.2713],["INTC","Intel","stock",42.4858,"WATCHLIST",-5.6667,null,"NEW",[42.04,40.91,41.5679,41.0042,41.133,42.4858],116.03,58.5224],["BIDU","Baidu","stock",42.2644,"WATCHLIST",-0.4122,null,"NEW",[34.76,36.58,36.3856,36.3768,36.4464,42.2644],86.97,34.3666],["RKLB","Rocket Lab","stock",37.6985,"AVOID/WAIT",-2.38,null,"NEW",[22.54,29.58,29.3966,30.2942,31.4811,37.6985],72.19,55.7247],["ARM","Arm Holdings","stock",36.1222,"AVOID/WAIT",-8.6975,null,"NEW",[40.44,43.72,43.0833,42.2105,43.1558,36.1222],283.33,51.9501],["DRAM","Strive U.S. Semiconductor","etf",33.4391,"AVOID/WAIT",-3.5697,null,"NEW",[31.07,32.0,34.1068,31.5958,32.7852,33.4391],59.7,52.4159],["SPCX","SpaceX","stock",29.7571,"AVOID/WAIT",-2.159,null,"NEW",[26.83,30.4,29.3607,29.5292,29.6855,29.7571],145.47,49.381],["TSLA","Tesla","stock",23.6546,"AVOID/WAIT",-3.9397,null,"NEW",[24.14,23.34,24.241,24.0617,23.3235,23.6546],357.45,47.0639]];
+const F=[["SPX","mixed","Nasdaq and S&P 500 closed at record highs as chip stocks rallied and oil slid on Iran-deal hopes; Trump Iran threats\u2026"],["QCOM","bullish","Jumped ~9% Monday after an AI interconnect demo with optical partners widened the story beyond handsets; Amazon custo\u2026"],["AVGO","bullish","Fresh '$1T club' coverage as AI custom-silicon momentum builds; Bernstein reiterated Buy with $575 target (Sept 21),\u2026"],["AAOI","bullish","Hyperscaler capex driving 'unprecedented' optical demand coverage; Corning's AI optical-interconnect demo lifted the\u2026"],["IGPT","n/a","AI/software ETFs back in focus as AMD's surge lifts holdings and commentators ask whether the AI software sell-off is\u2026"],["RKLB","bullish","Raymond James initiated at Outperform with $80 target; 96th Electron mission launched for Synspective; shares broke a\u2026"],["GLW","mixed","Showing high-density optical chip links at ECOC 2026; earlier multibillion Verizon fiber deal; mid-Sept $2B equity of\u2026"],["AMD","bullish","Officially in the $1T club with 'rarefied territory' coverage; Tuesday's pullback came after a strong run as chip sto\u2026"],["SMCI","bullish","Up 12% earlier this week after a record AI backlog drove major capacity expansion; Goldman flags expanding addressabl\u2026"],["AAPL","bullish","Stock at record highs after the iPhone duo launch; new CEO Ternus faces early Washington pressure to drop the China m\u2026"]];
+const HASPREV=true;
+const SIG={"FULL ENTRY":["var(--kimi-color-positive)","Full entry"],"TRANCHE 1/3":["var(--kimi-chart-1)","Tranche 1/3"],"WATCHLIST":["var(--kimi-color-warning)","Watchlist"],"AVOID/WAIT":["var(--kimi-color-danger)","Avoid/wait"]};
+const XC={"bullish":"var(--kimi-color-positive)","mixed":"var(--kimi-color-warning)","bearish":"var(--kimi-color-danger)","n/a":"var(--kimi-color-text-quaternary)"};
+if(F.length){
+document.getElementById('focus').innerHTML='<div style="font-size:12px;color:var(--kimi-color-text-tertiary);margin:2px 0 6px">Focus news & X opinion</div>'+F.map(r=>'<div style="display:flex;gap:8px;align-items:baseline;padding:5px 4px;border-bottom:0.5px solid var(--kimi-color-border)"><span style="font-size:13px;font-weight:500;width:52px;flex-shrink:0">'+r[0]+'</span><span style="width:8px;height:8px;border-radius:50%;flex-shrink:0;align-self:center;background:'+(XC[r[1]]||XC["n/a"])+'"></span><span style="font-size:12px;color:var(--kimi-color-text-secondary);line-height:1.5">'+r[2]+'</span></div>').join('');}
+const counts={};D.forEach(r=>counts[r[4]]=(counts[r[4]]||0)+1);
+document.getElementById('stats').innerHTML=["FULL ENTRY","TRANCHE 1/3","WATCHLIST","AVOID/WAIT"].map(s=>{
+const[c,l]=SIG[s];return '<div class="stat"><div style="font-size:28px;font-weight:500;color:'+c+'">'+(counts[s]||0)+'</div><div style="font-size:12px;color:var(--kimi-color-text-secondary);margin-top:4px">'+l+'</div></div>'}).join('');
+let cur="ALL";
+const chips=[["ALL","All"],["FULL ENTRY","Full entry"],["TRANCHE 1/3","Tranche 1/3"],["WATCHLIST","Watchlist"],["AVOID/WAIT","Avoid/wait"]];
+function spark(tr){
+const v=(tr||[]).filter(x=>x!==null&&x!==undefined);
+if(v.length<2)return '';
+const W=48,Hh=14,lo=Math.min.apply(null,v),hi=Math.max.apply(null,v),rg=hi-lo||1;
+const pts=tr.map((x,i)=>x===null||x===undefined?null:(i/(tr.length-1)*(W-4)+2).toFixed(1)+","+(Hh-2-(x-lo)/rg*(Hh-4)).toFixed(1)).filter(Boolean);
+const c=v[v.length-1]>=v[0]?'var(--kimi-color-positive)':'var(--kimi-color-danger)';
+return '<svg width="'+W+'" height="'+Hh+'" style="display:block;margin-top:2px"><polyline points="'+pts.join(' ')+'" fill="none" stroke="'+c+'" stroke-width="1.5"/></svg>';}
+function renderChips(){document.getElementById('chips').innerHTML=chips.map(c=>'<button class="chip'+(cur===c[0]?' on':'')+'" data-k="'+c[0]+'">'+c[1]+' '+(c[0]==='ALL'?D.length:(counts[c[0]]||0))+'</button>').join('');
+document.querySelectorAll('#w .chip').forEach(b=>b.onclick=()=>{cur=b.dataset.k;renderChips();renderRows();});}
+function renderRows(){
+const rows=D.filter(r=>cur==='ALL'||r[4]===cur);
+document.getElementById('rows').innerHTML=rows.map(r=>{const[c,l]=SIG[r[4]];
+const d=r[5]===null?null:r[5],dc=d===null?'var(--kimi-color-text-tertiary)':d>0?'var(--kimi-color-positive)':d<0?'var(--kimi-color-danger)':'var(--kimi-color-text-tertiary)';
+const ch=r[6],cc=ch===null?'var(--kimi-color-text-quaternary)':ch>0?'var(--kimi-color-positive)':ch<0?'var(--kimi-color-danger)':'var(--kimi-color-text-tertiary)';
+const chTxt=ch===null?'·':(ch>0?'▲ +':ch<0?'▼ ':'· ')+ch.toFixed(1);
+const px=r[9],pxTxt=px===null||px===undefined?'—':'$'+px.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+return '<div class="row"><div class="id"><div style="font-size:14px;font-weight:500">'+r[0]+' <span style="font-size:12px;font-weight:400;color:'+dc+'">'+(d===null?'':(d>0?'+':'')+d.toFixed(1)+'%')+'</span></div><div class="nm">'+r[1]+(r[10]===null||r[10]===undefined?'':' · RSI '+r[10].toFixed(0))+'</div></div>'
++'<div class="px">'+pxTxt+'<div class="pxl">price</div></div>'
++'<div style="width:52px;flex-shrink:0">'+spark(r[8])+'</div>'
++'<div class="mid"><div class="track"><div class="fill" style="width:'+Math.max(0,Math.min(100,r[3]||0))+'%;background:'+c+'"></div></div></div>'
++'<div class="sc">'+(r[3]===null?'—':r[3].toFixed(1))+'</div>'
++'<div class="chg" style="color:'+cc+'">'+chTxt+'</div>'
++'<div class="tag" style="color:'+c+';background:color-mix(in srgb,'+c+' 12%,transparent)">'+l+'</div></div>'}).join('');}
+renderChips();renderRows();
+})();
+</script>
