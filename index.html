@@ -21,6 +21,16 @@
 --b-fe-bg:#14532d;--b-fe-fg:#4ade80;--b-tr-bg:#1a3a24;--b-tr-fg:#86efac;--b-wl-bg:#423907;--b-wl-fg:#facc15;--b-aw-bg:#431407;--b-aw-fg:#fb923c;--b-nd-bg:#333333;--b-nd-fg:#aaaaaa;
 --h75-bg:#14532d;--h75-fg:#4ade80;--h55-bg:#1a3a24;--h55-fg:#86efac;--h40-bg:#423907;--h40-fg:#facc15;--h0-bg:#431407;--h0-fg:#fb923c;
 --up:#4ade80;--dn:#f87171}
+[data-theme="dusk"]{--bg:#16121f;--card:#211a30;--line:#3a2f4d;--txt:#ece6f5;--mut:#9d90b8;--accent:#a78bfa;--deep:#ece6f5;
+--thbg:#241d36;--thfg:#9d90b8;--hover:#2b2340;--shadow:0 1px 3px rgba(0,0,0,.35);--pill-bg:#2b2340;--ptxt:#cfc6e2;--link:#c4b5fd;
+--fe-n:#c4b5fd;--tr-n:#a78bfa;--wl-n:#fbbf24;--aw-n:#fb923c;
+--b-fe-bg:#3b2a5e;--b-fe-fg:#c4b5fd;--b-tr-bg:#2e2547;--b-tr-fg:#a78bfa;--b-wl-bg:#4a3418;--b-wl-fg:#fbbf24;--b-aw-bg:#4a2418;--b-aw-fg:#fb923c;--b-nd-bg:#2e2547;--b-nd-fg:#9d90b8;
+--h75-bg:#3b2a5e;--h75-fg:#c4b5fd;--h55-bg:#2e2547;--h55-fg:#a78bfa;--h40-bg:#4a3418;--h40-fg:#fbbf24;--h0-bg:#4a2418;--h0-fg:#fb923c;
+--up:#4ade80;--dn:#f87171}
+[data-theme="dusk"] h1{background:linear-gradient(92deg,#a78bfa 0%,#fb923c 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+[data-theme="dusk"] .themes button.on{background:linear-gradient(92deg,#7c3aed,#ea580c);color:#fff}
+[data-theme="dusk"] .card{border-top:2px solid;border-image:linear-gradient(90deg,#7c3aed,#ea580c) 1}
+[data-theme="dusk"] input:focus{outline:2px solid #fb923c;outline-offset:-1px}
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--txt);font:14px/1.45 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;padding:16px;max-width:1400px;margin:auto}
 h1{font-size:20px;margin-bottom:2px;color:var(--deep)}
@@ -251,7 +261,7 @@ function corrSection() {
 }
 function setTheme(t){document.documentElement.dataset.theme=t;try{localStorage.setItem("wl-theme",t)}catch(e){}
 document.querySelectorAll(".themes button").forEach(b=>b.classList.toggle("on",b.dataset.t===t));}
-document.getElementById("themes").innerHTML=[["purple","Purple"],["white","White"],["dark","Dark"]].map(x=>`<button data-t="${x[0]}" onclick="setTheme('${x[0]}')">${x[1]}</button>`).join("");
+document.getElementById("themes").innerHTML=[["purple","Purple"],["white","White"],["dark","Dark"],["dusk","Dusk"]].map(x=>`<button data-t="${x[0]}" onclick="setTheme('${x[0]}')">${x[1]}</button>`).join("");
 setTheme((()=>{try{return localStorage.getItem("wl-theme")||"purple"}catch(e){return "purple"}})());
 function icSection() {
   const el = document.getElementById("ic");
