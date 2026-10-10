@@ -143,9 +143,10 @@ input{max-width:100%}
 <h2>News &amp; X sentiment — focus list</h2>
 <div class="note">Agent-curated after each run: news take per focus ticker + popular investor opinion from X (via web research, coverage is best-effort). Headlines: Yahoo Finance, top 3 per ticker, linked.</div>
 <div class="fcards" id="fcards"></div>
-<details><summary>All tickers — latest headlines</summary>
+<details id="alld"><summary>All tickers — latest headlines</summary>
 <div class="wrap" style="max-height:50vh;margin-top:8px"><table class="nt" id="ntbl"></table></div>
 </details>
+<div class="note" id="alld-empty" style="display:none">Per-ticker Yahoo headlines were unavailable in this run (news API returned no data) — curated news for the focus names is in the cards above. This section reappears automatically when the feed works again.</div>
 <h2>Score history</h2>
 <div class="note" id="histnote"></div>
 <div class="wrap" style="max-height:50vh"><table class="hm" id="hm"></table></div>
@@ -237,6 +238,15 @@ function newsSection() {
     `</div>`).join("")
     : '<div class="note">Sentiment layer pending for today — focus cards appear after the post-run research step.</div>';
   const rows = D.filter(r => (NEWS[r.t] || []).length);
+  const det = document.getElementById("alld");
+  const detEmpty = document.getElementById("alld-empty");
+  if (!rows.length) {
+    if (det) det.style.display = "none";
+    if (detEmpty) detEmpty.style.display = "";
+    return;
+  }
+  if (det) det.style.display = "";
+  if (detEmpty) detEmpty.style.display = "none";
   document.getElementById("ntbl").innerHTML = rows.map(r =>
     `<tr><td class="l" style="white-space:nowrap"><b>${r.t}</b></td>` +
     NEWS[r.t].map(h => `<td><a href="${h.url}" target="_blank" rel="noopener">${esc(h.title)}</a></td>`).join("") +
