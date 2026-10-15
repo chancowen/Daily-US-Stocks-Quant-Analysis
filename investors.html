@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Legendary Investors — 13F Portfolios</title>
+<style>
+:root,[data-theme="purple"]{--bg:#fbf9f8;--card:#ffffff;--line:#e9e2ee;--txt:#2f2739;--mut:#7d7390;--accent:#7c3aed;--deep:#3b2a52;
+--thbg:#f4effa;--thfg:#6b5d85;--hover:#f7f3fc;--shadow:0 1px 2px rgba(76,29,149,.06);--pill-bg:#faf8fc;--ptxt:#4a4157;--link:#7c3aed;
+--up:#3a9d6e;--dn:#d0473a;--bar:#7c3aed}
+[data-theme="white"]{--bg:#ffffff;--card:#ffffff;--line:#e5e7eb;--txt:#111827;--mut:#6b7280;--accent:#2563eb;--deep:#111827;
+--thbg:#f9fafb;--thfg:#6b7280;--hover:#f3f4f6;--shadow:0 1px 2px rgba(17,24,39,.05);--pill-bg:#f9fafb;--ptxt:#374151;--link:#2563eb;
+--up:#16a34a;--dn:#dc2626;--bar:#2563eb}
+[data-theme="dark"]{--bg:#0f1420;--card:#1a2233;--line:#2a3550;--txt:#e8ecf4;--mut:#8b96ad;--accent:#a78bfa;--deep:#e8ecf4;
+--thbg:#141b2c;--thfg:#8b96ad;--hover:#1e2840;--shadow:none;--pill-bg:#232d45;--ptxt:#c3ccdd;--link:#a78bfa;
+--up:#4ade80;--dn:#f87171;--bar:#a78bfa}
+[data-theme="dusk"]{--bg:#16121f;--card:#211a30;--line:#3a2f4d;--txt:#ece6f5;--mut:#9d90b8;--accent:#a78bfa;--deep:#ece6f5;
+--thbg:#241d36;--thfg:#9d90b8;--hover:#2b2340;--shadow:0 1px 3px rgba(0,0,0,.35);--pill-bg:#2b2340;--ptxt:#cfc6e2;--link:#c4b5fd;
+--up:#4ade80;--dn:#f87171;--bar:#a78bfa}
+[data-theme="dusk"] h1{background:linear-gradient(100deg,#b8a7ea 0%,#cfa8c8 52%,#eeb391 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+body{background:var(--bg);color:var(--txt);font:14px/1.45 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;padding:16px;max-width:1200px;margin:auto}
+a{color:var(--link)}
+.topbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+h1{font-size:20px;margin:0;flex:1;min-width:220px}
+.homebtn{border:1px solid var(--line);background:var(--card);color:var(--ptxt);font:inherit;font-size:12px;padding:5px 12px;border-radius:8px;cursor:pointer;text-decoration:none;box-shadow:var(--shadow)}
+.homebtn:hover{background:var(--hover)}
+.themes{display:flex;gap:2px;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:3px;box-shadow:var(--shadow)}
+.themes button{border:0;background:transparent;color:var(--mut);font:inherit;font-size:11px;padding:4px 10px;border-radius:6px;cursor:pointer}
+.themes button.on{background:var(--accent);color:#fff}
+.sub{color:var(--mut);font-size:12px;margin-bottom:14px}
+.pick{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 16px}
+.pick button{border:1px solid var(--line);background:var(--card);color:var(--mut);font:inherit;font-size:13px;padding:7px 14px;border-radius:20px;cursor:pointer;box-shadow:var(--shadow)}
+.pick button.on{background:var(--accent);color:#fff;border-color:transparent;font-weight:600}
+.panel{display:none}
+.panel.on{display:block}
+.invhead{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;box-shadow:var(--shadow);margin-bottom:12px}
+.avatar{width:52px;height:52px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;flex-shrink:0}
+.invtitle{flex:2;min-width:240px}
+.invtitle h2{margin:0 0 2px;font-size:17px}
+.invtitle .fund{font-size:12px;color:var(--mut)}
+.stylechip{display:inline-block;font-size:11px;border:1px solid var(--line);background:var(--pill-bg);color:var(--ptxt);border-radius:20px;padding:2px 10px;margin-top:6px}
+.meta{display:flex;gap:22px;flex-wrap:wrap;flex:3}
+.meta .m .v{font-size:19px;font-weight:700}
+.meta .m .k{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.5px}
+.why{background:var(--pill-bg);border:1px solid var(--line);border-radius:10px;padding:12px 16px;font-size:13px;color:var(--ptxt);margin-bottom:12px}
+.why b{color:var(--txt)}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th{position:sticky;top:0;background:var(--thbg);color:var(--thfg);font-weight:600;text-align:right;padding:7px 10px;border-bottom:1px solid var(--line);white-space:nowrap;z-index:1}
+th.l,td.l{text-align:left}
+td{padding:6px 10px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+tr:hover td{background:var(--hover)}
+.wbar{display:flex;align-items:center;gap:8px;min-width:160px}
+.wtrack{flex:1;height:6px;background:var(--pill-bg);border-radius:3px;overflow:hidden}
+.wfill{height:6px;background:var(--bar);border-radius:3px}
+.wval{width:48px;text-align:right;font-variant-numeric:tabular-nums}
+.badge{display:inline-block;font-size:10px;background:var(--thbg);color:var(--thfg);border-radius:4px;padding:1px 6px;margin-left:6px;vertical-align:middle}
+.tagN{font-size:10px;border-radius:4px;padding:1px 6px;margin-left:6px;background:color-mix(in srgb,var(--up) 15%,transparent);color:var(--up);vertical-align:middle}
+.tagI{font-size:10px;border-radius:4px;padding:1px 6px;margin-left:6px;background:color-mix(in srgb,var(--dn) 12%,transparent);color:var(--dn);vertical-align:middle}
+.overlap{margin-top:18px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px;box-shadow:var(--shadow);font-size:13px}
+.overlap h3{margin:0 0 6px;font-size:14px}
+.chip{display:inline-block;font-size:11px;border:1px solid var(--line);background:var(--pill-bg);color:var(--ptxt);border-radius:20px;padding:3px 10px;margin:2px 4px 2px 0}
+.src{color:var(--mut);font-size:11px;margin-top:8px}
+.note{color:var(--mut);font-size:12px;margin:14px 0 6px}
+</style></head><body>
+<div class="topbar">
+  <a class="homebtn" href="index.html">&#8592; Daily Watchlist</a>
+  <h1>Legendary Investors &mdash; What the Masters Hold</h1>
+  <div class="themes" id="themes"></div>
+</div>
+<div class="sub">Five complementary investing philosophies, tracked via public filings. 13F data is delayed up to 45 days after quarter-end; ARK publishes holdings daily. Educational reference only &mdash; not investment advice.</div>
+
+<div class="pick" id="pick"></div>
+
+<!-- 1 BUFFETT -->
+<section class="panel" id="p-buffett">
+  <div class="invhead">
+    <div class="avatar">WB</div>
+    <div class="invtitle"><h2>Warren Buffett</h2><div class="fund">Berkshire Hathaway (BRK) &middot; Long-term value</div><span class="stylechip">Extremely low turnover &middot; buy wonderful companies &amp; hold</span></div>
+    <div class="meta">
+      <div class="m"><div class="v">$299B</div><div class="k">13F equity value</div></div>
+      <div class="m"><div class="v">26</div><div class="k">positions</div></div>
+      <div class="m"><div class="v">71.9%</div><div class="k">top-5 weight</div></div>
+      <div class="m"><div class="v">Q2 2026</div><div class="k">13F as of</div></div>
+    </div>
+  </div>
+  <div class="why"><b>Why start with him:</b> Extremely low turnover &mdash; what you see in his 13F is mostly still there. Great for learning &ldquo;buy wonderful companies and hold.&rdquo; Note: Buffett handed the CEO role to Greg Abel in 2026; portfolio is now managed by Abel with Combs/Weschler legacy positions.</div>
+  <div style="overflow-x:auto"><table>
+    <thead><tr><th class="l">Ticker</th><th class="l">Company</th><th>Weight</th><th class="l" style="min-width:170px">Portfolio share</th></tr></thead><tbody>
+    <tr><td class="l"><b>AAPL</b><span class="badge">watchlist</span></td><td class="l">Apple</td><td class="l" colspan="2"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:100%"></div></div><span class="wval">&asymp;22.0%</span></div></td></tr>
+    <tr><td class="l"><b>AXP</b></td><td class="l">American Express</td><td class="l" colspan="2"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:78%"></div></div><span class="wval">&asymp;17.1%</span></div></td></tr>
+    <tr><td class="l"><b>KO</b></td><td class="l">Coca-Cola</td><td class="l" colspan="2"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:43%"></div></div><span class="wval">&asymp;9.4%</span></div></td></tr>
+    <tr><td class="l"><b>BAC</b><span class="tagI">trimmed Q2</span></td><td class="l">Bank of America</td><td class="l" colspan="2"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:40%"></div></div><span class="wval">&asymp;8.7%</span></div></td></tr>
+    <tr><td class="l"><b>CVX</b></td><td class="l">Chevron</td><td class="l" colspan="2"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:29%"></div></div><span class="wval">&asymp;6.4%</span></div></td></tr>
+    <tr><td class="l"><b>OXY</b></td><td class="l">Occidental Petroleum</td><td class="l" colspan="2"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:20%"></div></div><span class="wval">&asymp;4.3%</span></div></td></tr>
+    <tr><td class="l"><b>MCO</b></td><td class="l">Moody&rsquo;s</td><td class="l" colspan="2"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:18%"></div></div><span class="wval">&asymp;3.9%</span></div></td></tr>
+    <tr><td class="l"><b>KHC</b></td><td class="l">Kraft Heinz</td><td class="l" colspan="2"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:15%"></div></div><span class="wval">&asymp;3.3%</span></div></td></tr>
+    <tr><td class="l"><b>CB</b></td><td class="l">Chubb</td><td class="l" colspan="2"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:12%"></div></div><span class="wval">&asymp;2.7%</span></div></td></tr>
+    <tr><td class="l"><b>MSBHF</b></td><td class="l">Mitsubishi (trading house)</td><td class="l" colspan="2"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:11%"></div></div><span class="wval">&asymp;2.4%</span></div></td></tr>
+    </tbody></table></div>
+  <div class="src">Source: Berkshire Hathaway 13F-HR for period ended 2026-06-30 (filed Aug 2026), aggregated via SEC EDGAR / Valuesider / Investing.com. Top-5 names &asymp;71.9% of the $299.3B portfolio; weights beyond AAPL/AXP rounded. Continued trims of AAPL, BAC and VeriSign in Q2 2026.</div>
+</section>
+
+<!-- 2 ACKMAN -->
+<section class="panel" id="p-ackman">
+  <div class="invhead">
+    <div class="avatar">BA</div>
+    <div class="invtitle"><h2>Bill Ackman</h2><div class="fund">Pershing Square Capital Management &middot; High-conviction concentrated</div><span class="stylechip">&asymp;10 positions &middot; publishes thesis letters</span></div>
+    <div class="meta">
+      <div class="m"><div class="v">$19.5B</div><div class="k">13F equity value</div></div>
+      <div class="m"><div class="v">14</div><div class="k">positions</div></div>
+      <div class="m"><div class="v">93.6%</div><div class="k">top-10 weight</div></div>
+      <div class="m"><div class="v">Q2 2026</div><div class="k">13F as of</div></div>
+    </div>
+  </div>
+  <div class="why"><b>Why start with him:</b> Only ~10 meaningful positions, and he publishes detailed letters <b>explaining why</b> he bought each one. Best teacher for learning investment reasoning.</div>
+  <div style="overflow-x:auto"><table>
+    <thead><tr><th class="l">Ticker</th><th class="l">Company</th><th class="l" style="min-width:170px">Portfolio share</th><th>QoQ</th></tr></thead><tbody>
+    <tr><td class="l"><b>UBER</b></td><td class="l">Uber Technologies</td><td class="l"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:100%"></div></div><span class="wval">12.7%</span></div></td><td class="tagI">+14.6% sh</td></tr>
+    <tr><td class="l"><b>BN</b></td><td class="l">Brookfield Corp</td><td class="l"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:99%"></div></div><span class="wval">12.6%</span></div></td><td class="tagI">&minus;3.7% sh</td></tr>
+    <tr><td class="l"><b>MSFT</b><span class="badge">watchlist</span></td><td class="l">Microsoft</td><td class="l"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:94%"></div></div><span class="wval">11.9%</span></div></td><td class="tagI">+9.8% sh</td></tr>
+    <tr><td class="l"><b>AMZN</b><span class="badge">watchlist</span></td><td class="l">Amazon</td><td class="l"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:83%"></div></div><span class="wval">10.5%</span></div></td><td class="tagI">&minus;25.2% sh</td></tr>
+    <tr><td class="l"><b>HHH</b></td><td class="l">Howard Hughes Holdings</td><td class="l"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:81%"></div></div><span class="wval">10.2%</span></div></td><td class="tagI">+47.7% sh</td></tr>
+    <tr><td class="l"><b>QSR</b></td><td class="l">Restaurant Brands Intl</td><td class="l"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:76%"></div></div><span class="wval">9.6%</span></div></td><td class="tagI">+14.0% sh</td></tr>
+    <tr><td class="l"><b>META</b><span class="badge">watchlist</span></td><td class="l">Meta Platforms</td><td class="l"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:73%"></div></div><span class="wval">9.3%</span></div></td><td class="tagI">+20.1% sh</td></tr>
+    <tr><td class="l"><b>V</b><span class="tagN">NEW</span></td><td class="l">Visa</td><td class="l"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:45%"></div></div><span class="wval">5.8%</span></div></td><td>new</td></tr>
+    <tr><td class="l"><b>MA</b><span class="tagN">NEW</span></td><td class="l">Mastercard</td><td class="l"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:44%"></div></div><span class="wval">5.6%</span></div></td><td>new</td></tr>
+    <tr><td class="l"><b>SPGI</b><span class="tagN">NEW</span></td><td class="l">S&amp;P Global</td><td class="l"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:43%"></div></div><span class="wval">5.4%</span></div></td><td>new</td></tr>
+    </tbody></table></div>
+  <div class="src">Source: Pershing Square 13F-HR, period ended 2026-06-30 (filed 2026-08-14). Q2 moves: new positions in V, MA, SPGI, NFLX, PSUS; exited GOOGL entirely; AMZN trimmed 25%, HHH raised 48%. Top 10 = 93.6% of disclosed book.</div>
+</section>
+
+<!-- 3 KLARMAN -->
+<section class="panel" id="p-klarman">
+  <div class="invhead">
+    <div class="avatar">SK</div>
+    <div class="invtitle"><h2>Seth Klarman</h2><div class="fund">The Baupost Group &middot; Deep value, contrarian</div><span class="stylechip">Buys what&rsquo;s unpopular &amp; cheap &middot; margin of safety</span></div>
+    <div class="meta">
+      <div class="m"><div class="v">$5.4B</div><div class="k">13F equity value</div></div>
+      <div class="m"><div class="v">23</div><div class="k">positions</div></div>
+      <div class="m"><div class="v">74.9%</div><div class="k">top-10 weight</div></div>
+      <div class="m"><div class="v">Q2 2026</div><div class="k">13F as of</div></div>
+    </div>
+  </div>
+  <div class="why"><b>Why start with him:</b> Buys what&rsquo;s unpopular and cheap. Teaches risk control and &ldquo;margin of safety&rdquo; &mdash; a good counterbalance to hype.</div>
+  <div style="overflow-x:auto"><table>
+    <thead><tr><th class="l">Ticker</th><th class="l">Company</th><th class="l" style="min-width:170px">Portfolio share</th><th>QoQ</th></tr></thead><tbody>
+    <tr><td class="l"><b>AMZN</b><span class="badge">watchlist</span></td><td class="l">Amazon</td><td class="l"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:100%"></div></div><span class="wval">16.5%</span></div></td><td class="tagI">+20% sh</td></tr>
+    <tr><td class="l"><b>ELV</b></td><td class="l">Elevance Health</td><td class="l"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:55%"></div></div><span class="wval">9.1%</span></div></td><td>&mdash;</td></tr>
+    <tr><td class="l"><b>QSR</b></td><td class="l">Restaurant Brands Intl</td><td class="l"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:55%"></div></div><span class="wval">9.0%</span></div></td><td class="tagI">&minus;16% sh</td></tr>
+    <tr><td class="l"><b>GOOGL</b><span class="badge">watchlist</span></td><td class="l">Alphabet</td><td class="l"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:54%"></div></div><span class="wval">8.9%</span></div></td><td class="tagI">+16% sh</td></tr>
+    <tr><td class="l"><b>FERG</b></td><td class="l">Ferguson Enterprises</td><td class="l"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:39%"></div></div><span class="wval">6.4%</span></div></td><td class="tagI">+1% sh</td></tr>
+    <tr><td class="l"><b>GPC</b></td><td class="l">Genuine Parts Co</td><td class="l"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:37%"></div></div><span class="wval">6.1%</span></div></td><td class="tagI">+89% sh</td></tr>
+    <tr><td class="l"><b>UNP</b></td><td class="l">Union Pacific</td><td class="l"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:36%"></div></div><span class="wval">6.0%</span></div></td><td class="tagI">&minus;23% sh</td></tr>
+    <tr><td class="l"><b>V</b></td><td class="l">Visa</td><td class="l"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:27%"></div></div><span class="wval">4.4%</span></div></td><td>&mdash;</td></tr>
+    <tr><td class="l"><b>WCC</b></td><td class="l">Wesco Intl</td><td class="l"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:25%"></div></div><span class="wval">4.2%</span></div></td><td class="tagI">&minus;54% sh</td></tr>
+    <tr><td class="l"><b>AON</b></td><td class="l">Aon plc</td><td class="l"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:25%"></div></div><span class="wval">4.2%</span></div></td><td class="tagI">&minus;11% sh</td></tr>
+    </tbody></table></div>
+  <div class="src">Source: Baupost Group 13F, period ended 2026-06-30 (filed 2026-08-13). Q2 moves: new CME, Axalta, Pershing Square; exits Willis Towers Watson &amp; Vaxcyte; NCLH +113%, GPC +89%; cuts WCC &minus;54%, Eagle Materials &minus;40%.</div>
+</section>
+
+<!-- 4 WOOD -->
+<section class="panel" id="p-wood">
+  <div class="invhead">
+    <div class="avatar">CW</div>
+    <div class="invtitle"><h2>Cathie Wood</h2><div class="fund">ARK Invest &mdash; flagship ARK Innovation ETF (ARKK) &middot; Aggressive growth / innovation</div><span class="stylechip">Holdings published daily &middot; zero delay &middot; high risk</span></div>
+    <div class="meta">
+      <div class="m"><div class="v">$6.5B</div><div class="k">ARKK assets</div></div>
+      <div class="m"><div class="v">46</div><div class="k">holdings</div></div>
+      <div class="m"><div class="v">49.0%</div><div class="k">top-10 weight</div></div>
+      <div class="m"><div class="v">Oct 2026</div><div class="k">data as of</div></div>
+    </div>
+  </div>
+  <div class="why"><b>Why start with her:</b> The opposite philosophy &mdash; teaches you what growth investors look for. Bonus: ARK publishes holdings <b>daily</b>, zero delay. (High risk though &mdash; treat as a study case, not a model to fully copy.)</div>
+  <div style="overflow-x:auto"><table>
+    <thead><tr><th class="l">Ticker</th><th class="l">Company</th><th class="l" style="min-width:170px">Portfolio share</th></tr></thead><tbody>
+    <tr><td class="l"><b>TSLA</b><span class="badge">watchlist</span></td><td class="l">Tesla</td><td class="l"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:100%"></div></div><span class="wval">9.5%</span></div></td></tr>
+    <tr><td class="l"><b>SPCX</b><span class="badge">watchlist</span></td><td class="l">SpaceX</td><td class="l"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:64%"></div></div><span class="wval">6.1%</span></div></td></tr>
+    <tr><td class="l"><b>CRCL</b></td><td class="l">Circle Internet Group</td><td class="l"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:60%"></div></div><span class="wval">5.7%</span></div></td></tr>
+    <tr><td class="l"><b>TEM</b></td><td class="l">Tempus AI</td><td class="l"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:53%"></div></div><span class="wval">5.0%</span></div></td></tr>
+    <tr><td class="l"><b>COIN</b></td><td class="l">Coinbase Global</td><td class="l"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:46%"></div></div><span class="wval">4.4%</span></div></td></tr>
+    <tr><td class="l"><b>CRSP</b><span class="badge">watchlist</span></td><td class="l">CRISPR Therapeutics</td><td class="l"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:43%"></div></div><span class="wval">4.1%</span></div></td></tr>
+    <tr><td class="l"><b>SHOP</b></td><td class="l">Shopify</td><td class="l"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:37%"></div></div><span class="wval">3.6%</span></div></td></tr>
+    <tr><td class="l"><b>HOOD</b></td><td class="l">Robinhood Markets</td><td class="l"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:35%"></div></div><span class="wval">3.3%</span></div></td></tr>
+    <tr><td class="l"><b>TWST</b></td><td class="l">Twist Bioscience</td><td class="l"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:34%"></div></div><span class="wval">3.2%</span></div></td></tr>
+    <tr><td class="l"><b>NVDA</b><span class="badge">watchlist</span></td><td class="l">NVIDIA</td><td class="l"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:33%"></div></div><span class="wval">3.1%</span></div></td></tr>
+    </tbody></table></div>
+  <div class="src">Source: ARK Invest daily-published holdings via Barron&rsquo;s fund data (2026-10-14) and StockAnalysis ARKK holdings. Includes private positions (SpaceX, OpenAI). Tesla remains the anchor bet &mdash; ARK&rsquo;s 2029 model puts ~90% of Tesla&rsquo;s enterprise value on robotaxis.</div>
+</section>
+
+<!-- 5 DRUCKENMILLER -->
+<section class="panel" id="p-druck">
+  <div class="invhead">
+    <div class="avatar">SD</div>
+    <div class="invtitle"><h2>Stanley Druckenmiller</h2><div class="fund">Duquesne Family Office &middot; Flexible, macro-aware</div><span class="stylechip">Changes his mind fast &middot; cuts losses</span></div>
+    <div class="meta">
+      <div class="m"><div class="v">$5.2B</div><div class="k">13F equity value</div></div>
+      <div class="m"><div class="v">90</div><div class="k">positions</div></div>
+      <div class="m"><div class="v">53.2%</div><div class="k">top-10 weight</div></div>
+      <div class="m"><div class="v">Q2 2026</div><div class="k">13F as of</div></div>
+    </div>
+  </div>
+  <div class="why"><b>Why start with him:</b> Famous for changing his mind fast and cutting losses. Teaches adaptability &mdash; the skill the other four don&rsquo;t show you.</div>
+  <div style="overflow-x:auto"><table>
+    <thead><tr><th class="l">Ticker</th><th class="l">Company</th><th class="l" style="min-width:170px">Portfolio share</th><th>QoQ</th></tr></thead><tbody>
+    <tr><td class="l"><b>NTRA</b></td><td class="l">Natera</td><td class="l"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:100%"></div></div><span class="wval">16.6%</span></div></td><td class="tagI">+4.0% sh</td></tr>
+    <tr><td class="l"><b>INSM</b></td><td class="l">Insmed</td><td class="l"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:34%"></div></div><span class="wval">5.7%</span></div></td><td class="tagI">+140% sh</td></tr>
+    <tr><td class="l"><b>TSM</b><span class="badge">watchlist</span></td><td class="l">TSMC (ADR)</td><td class="l"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:33%"></div></div><span class="wval">5.4%</span></div></td><td class="tagI">+19.1% sh</td></tr>
+    <tr><td class="l"><b>IBIT</b></td><td class="l">iShares Bitcoin Trust (ETF)</td><td class="l"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:31%"></div></div><span class="wval">5.1%</span></div></td><td class="tagN">NEW</td></tr>
+    <tr><td class="l"><b>AMZN</b><span class="badge">watchlist</span></td><td class="l">Amazon</td><td class="l"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:28%"></div></div><span class="wval">4.6%</span></div></td><td class="tagI">+307% sh</td></tr>
+    <tr><td class="l"><b>STM</b></td><td class="l">STMicroelectronics</td><td class="l"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:27%"></div></div><span class="wval">4.5%</span></div></td><td class="tagI">+18.8% sh</td></tr>
+    <tr><td class="l"><b>QQQ</b><span class="badge">watchlist</span></td><td class="l">Invesco QQQ Trust</td><td class="l"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:22%"></div></div><span class="wval">3.7%</span></div></td><td class="tagI">+9.1% sh</td></tr>
+    <tr><td class="l"><b>YPF</b></td><td class="l">YPF (Argentina energy)</td><td class="l"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:16%"></div></div><span class="wval">2.7%</span></div></td><td class="tagI">&minus;3.0% sh</td></tr>
+    <tr><td class="l"><b>CDW</b></td><td class="l">CDW Corp</td><td class="l"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:16%"></div></div><span class="wval">2.7%</span></div></td><td class="tagN">NEW</td></tr>
+    <tr><td class="l"><b>TBBB</b></td><td class="l">BBB Foods</td><td class="l"><div class="wbar"><div class="wtrack"><div class="wfill" style="width:14%"></div></div><span class="wval">2.3%</span></div></td><td class="tagI">&minus;6.7% sh</td></tr>
+    </tbody></table></div>
+  <div class="src">Source: Duquesne Family Office 13F-HR, period ended 2026-06-30 (filed 2026-08-14). Q2: massive rotation &mdash; 48 new positions, 27 exits. Swapped ETHB for IBIT (+$264M), added TSM/STM/AMZN semis &amp; megacap tech, new CDW &amp; GOOGL; also holds RVMD, STX, FOX, SE, UAL.</div>
+</section>
+
+<div class="overlap">
+  <h3>Cross-portfolio overlap &mdash; what the masters agree on</h3>
+  <div style="margin-bottom:6px"><span class="chip"><b>AMZN</b> &mdash; held by all except Wood&rsquo;s top-10 (Ackman &middot; Klarman &middot; Druckenmiller)</span></div>
+  <div style="margin-bottom:6px"><span class="chip"><b>QSR</b> &mdash; Ackman + Klarman</span><span class="chip"><b>V</b> &mdash; Ackman (new) + Klarman</span><span class="chip"><b>GOOGL</b> &mdash; Klarman + Druckenmiller (new); Ackman exited</span></div>
+  <div><span class="chip"><b>Watchlist names appearing here:</b> AAPL, MSFT, AMZN, GOOGL, META, NVDA, TSLA, TSM, QQQ (QQQJ family), SPCX, CRSP, RVMD</span></div>
+  <div class="src">Note: 13F shows long US equity positions only &mdash; no shorts, options overlays, cash or non-US holdings. Weights for Berkshire beyond AAPL/AXP are approximate.</div>
+</div>
+
+<script>
+const INVESTORS=[["buffett","1 · Buffett"],["ackman","2 · Ackman"],["klarman","3 · Klarman"],["wood","4 · Wood"],["druck","5 · Druckenmiller"]];
+function setTheme(t){document.documentElement.dataset.theme=t;try{localStorage.setItem("wl-theme",t)}catch(e){}
+document.querySelectorAll(".themes button").forEach(b=>b.classList.toggle("on",b.dataset.t===t));}
+document.getElementById("themes").innerHTML=[["purple","Purple"],["white","White"],["dark","Dark"],["dusk","Dusk"]].map(x=>`<button data-t="${x[0]}" onclick="setTheme('${x[0]}')">${x[1]}</button>`).join("");
+setTheme((()=>{try{return localStorage.getItem("wl-theme")||"purple"}catch(e){return "purple"}})());
+function show(k){document.querySelectorAll(".panel").forEach(p=>p.classList.remove("on"));
+document.getElementById("p-"+k).classList.add("on");
+document.querySelectorAll("#pick button").forEach(b=>b.classList.toggle("on",b.dataset.k===k));}
+document.getElementById("pick").innerHTML=INVESTORS.map(x=>`<button data-k="${x[0]}" onclick="show('${x[0]}')">${x[1]}</button>`).join("");
+const h=(location.hash||"").replace("#","");show(INVESTORS.some(x=>x[0]===h)?h:"buffett");
+</script>
+</body></html>
