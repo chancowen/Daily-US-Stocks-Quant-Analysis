@@ -18,8 +18,9 @@
 [data-theme="dusk"] h1{background:linear-gradient(100deg,#b8a7ea 0%,#cfa8c8 52%,#eeb391 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
 body{background:var(--bg);color:var(--txt);font:14px/1.45 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;padding:16px;max-width:1200px;margin:auto}
 a{color:var(--link)}
-.topbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:4px}
-h1{font-size:20px;margin:0;flex:1;min-width:220px}
+.topbar{display:block;margin-bottom:4px}
+.topbar h1{font-size:20px;margin:0}
+.toolbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:10px}
 .homebtn{border:1px solid var(--line);background:var(--card);color:var(--ptxt);font:inherit;font-size:12px;padding:5px 12px;border-radius:8px;cursor:pointer;text-decoration:none;box-shadow:var(--shadow)}
 .homebtn:hover{background:var(--hover)}
 .themes{display:flex;gap:2px;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:3px;box-shadow:var(--shadow)}
@@ -61,7 +62,7 @@ tr:hover td{background:var(--hover)}
 .note{color:var(--mut);font-size:12px;margin:14px 0 6px}
 @media (max-width:640px){
 body{padding:10px}
-h1{font-size:16px;min-width:0;flex-basis:100%}
+h1{font-size:16px}
 .pick button{font-size:12px;padding:6px 10px}
 .invhead{gap:10px;padding:12px}
 .meta{gap:14px}
@@ -69,9 +70,11 @@ h1{font-size:16px;min-width:0;flex-basis:100%}
 }
 </style></head><body>
 <div class="topbar">
-  <a class="homebtn" href="index.html">&#8592; Daily Watchlist</a>
   <h1>Legendary Investors &mdash; What the Masters Hold</h1>
-  <div class="themes" id="themes"></div>
+  <div class="toolbar">
+    <a class="homebtn" href="index.html">&#8592; Daily Watchlist</a>
+    <div class="themes" id="themes"></div>
+  </div>
 </div>
 <div class="sub">Five complementary investing philosophies, tracked via public filings. 13F data is delayed up to 45 days after quarter-end; ARK publishes holdings daily. Educational reference only &mdash; not investment advice.</div>
 

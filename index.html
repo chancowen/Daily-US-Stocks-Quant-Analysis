@@ -82,8 +82,12 @@ summary{cursor:pointer;color:var(--mut);font-size:13px}
 .nt td{white-space:normal;text-align:left;font-size:12px}
 .nt td a{color:var(--link);text-decoration:none}
 .nt td a:hover{text-decoration:underline}
-.topbar{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
-.themes{position:fixed;top:10px;right:12px;z-index:20;display:flex;gap:2px;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:3px;box-shadow:var(--shadow)}
+.topbar{display:block;margin-bottom:6px}
+.topbar h1{font-size:20px;margin:0}
+.toolbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:10px}
+.navbtn{border:1px solid var(--line);background:var(--card);color:var(--ptxt);font:inherit;font-size:12px;padding:5px 12px;border-radius:8px;cursor:pointer;text-decoration:none;box-shadow:var(--shadow)}
+.navbtn:hover{background:var(--hover)}
+.themes{margin-left:auto;display:flex;gap:2px;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:3px;box-shadow:var(--shadow)}
 .themes button{border:0;background:transparent;color:var(--mut);font:inherit;font-size:11px;padding:4px 10px;border-radius:6px;cursor:pointer}
 .themes button.on{background:var(--accent);color:#fff}
 @media (max-width:640px){
@@ -100,7 +104,7 @@ th,td{padding:6px 5px}
 input{max-width:100%}
 }
 </style></head><body>
-<div class="topbar"><h1>US Stock Watchlist — Daily Quant Signals</h1><a href="investors.html" style="border:1px solid var(--line);background:var(--card);color:var(--ptxt);font:inherit;font-size:12px;padding:5px 12px;border-radius:8px;cursor:pointer;text-decoration:none;box-shadow:var(--shadow)">Legendary Investors →</a><div class="themes" id="themes"></div></div>
+<div class="topbar"><h1>US Stock Watchlist — Daily Quant Signals</h1><div class="toolbar"><a class="navbtn" href="investors.html">Legendary Investors →</a><div class="themes" id="themes"></div></div></div>
 <div class="sub">Data as of 2026-10-13 · 4-pillar score (Momentum/25 · Risk/25 · Fundamentals/25 · Valuation/25) · ETFs &amp; indices on Momentum+Risk rescaled to 100 · Source: Yahoo Finance</div>
 <div class="cards" id="cards"></div>
 <input id="q" placeholder="Filter ticker or name…" oninput="render()">
