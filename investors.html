@@ -19,11 +19,14 @@
 body{background:var(--bg);color:var(--txt);font:14px/1.45 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;padding:16px;max-width:1200px;margin:auto}
 a{color:var(--link)}
 .topbar{display:block;margin-bottom:4px}
+.utilbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.seg{display:flex;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:3px;box-shadow:var(--shadow)}
+.seg a{font:inherit;font-size:12px;padding:4px 12px;border-radius:6px;color:var(--mut);text-decoration:none;white-space:nowrap}
+.seg a.on{background:var(--accent);color:#fff;font-weight:600}
 .topbar h1{font-size:20px;margin:0}
-.toolbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:10px}
 .homebtn{border:1px solid var(--line);background:var(--card);color:var(--ptxt);font:inherit;font-size:12px;padding:5px 12px;border-radius:8px;cursor:pointer;text-decoration:none;box-shadow:var(--shadow)}
 .homebtn:hover{background:var(--hover)}
-.themes{display:flex;gap:2px;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:3px;box-shadow:var(--shadow)}
+.themes{margin-left:auto;display:flex;gap:2px;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:3px;box-shadow:var(--shadow)}
 .themes button{border:0;background:transparent;color:var(--mut);font:inherit;font-size:11px;padding:4px 10px;border-radius:6px;cursor:pointer}
 .themes button.on{background:var(--accent);color:#fff}
 .sub{color:var(--mut);font-size:12px;margin-bottom:14px}
@@ -70,11 +73,11 @@ h1{font-size:16px}
 }
 </style></head><body>
 <div class="topbar">
-  <h1>Legendary Investors &mdash; What the Masters Hold</h1>
-  <div class="toolbar">
-    <a class="homebtn" href="index.html">&#8592; Daily Watchlist</a>
+  <div class="utilbar">
+    <div class="seg"><a href="index.html">Watchlist</a><a href="investors.html" class="on">Legendary Investors</a></div>
     <div class="themes" id="themes"></div>
   </div>
+  <h1>Legendary Investors &mdash; What the Masters Hold</h1>
 </div>
 <div class="sub">Five complementary investing philosophies, tracked via public filings. 13F data is delayed up to 45 days after quarter-end; ARK publishes holdings daily. Educational reference only &mdash; not investment advice.</div>
 
